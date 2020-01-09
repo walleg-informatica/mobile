@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+}
+
+.card .card__image {
+  width: 30%;
+}
+
+.card .card__content {
+  padding: 1rem;
+}
+
+.card .card__content .card__content__title {
+  padding: 1rem;
+}
