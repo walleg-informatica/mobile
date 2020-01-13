@@ -1,0 +1,15 @@
+.pagamento {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.pagamento > * {
+  display: flex;
+  flex: 1 1 auto;
+  margin: 0.5rem 0;
+}
+
+.pagamento__item > div {
+  flex: 1 0 50%;
+}
