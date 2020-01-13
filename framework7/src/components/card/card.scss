@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  box-shadow: 3px 4px 5px dimgray;
+  margin-top: 1.5rem;
+
+  .card__image {
+    width: 30%;
+  }
+
+  .card__content {
+    padding: 1rem;
+
+  }
+  
+  .card__content__title .card__content__description {
+    padding: 1rem;
+  }
+
+  .card__content__title {
+    font-size: 1.5rem;
+  }
+}
