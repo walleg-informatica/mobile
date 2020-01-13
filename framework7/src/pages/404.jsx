@@ -3,10 +3,10 @@ import { Page, Navbar, Block } from 'framework7-react';
 
 export default () => (
   <Page>
-    <Navbar title="Not found" backLink="Back" />
+    <Navbar title="Não Encontrado" backLink="Back" />
     <Block strong>
-      <p>Sorry</p>
-      <p>Requested content not found.</p>
+      <p>Desculpe</p>
+      <p>Este conteúdo não foi encontrado</p>
     </Block>
   </Page>
 );

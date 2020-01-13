@@ -9,7 +9,7 @@ import React from 'react';
 
 const load = () => {
   const url = 'https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido'
-  return fetch(url)
+  return fetch(url, {mode: 'cors'})
     .then((result) => result.json())
 }
 
@@ -17,34 +17,42 @@ const Pedidos = () => {
   const [pedidos, setPedidos] = React.useState([])
   console.log(pedidos)
   load().then((pedidos) => { 
-    console.log("pee", pedidos)
+    console.log("pedidos", pedidos)
     setPedidos(pedidos)
    })
- 
+
   return (
     <Page name="form">
       <Navbar title="Pedidos" backLink="Back" />
-      <table>
-        <thead>
-          <tr>
-            <th className="label-cell">id</th>
-            <th className="numeric-cell">valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            pedidos.map((pedido) => (
-              <tr>
-                <td className="label-cell">{pedido.id}</td>
-                <td className="numeric-cell">{pedido.valor}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <div className="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th className="label-cell">ID</th>
+              <th className="numeric-cell">Valor do Produto</th>
+              <td className="label-cell">Status</td>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              pedidos.map((pedido) => (
+                <tr key={pedido.id}>
+                  <td className="label-cell">{pedido.id}</td>
+                  <td className="numeric-cell">{pedido.valor}</td>
+                  <td className="label-cell">EM ABERTO</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </Page>
   );
 };
 
-
+/* Changes color of status chip according to status
+  <div className={"card__content__status chip color-" + (status === 'EM ABERTO' ? 'green' : 'red')}>
+    <div class="chip-label">{status}</div>
+  </div>
+*/
 export default Pedidos;

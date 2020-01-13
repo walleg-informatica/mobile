@@ -1,8 +1,10 @@
 
 import HomePage from '../pages/home.jsx';
+import LoginPage from '../pages/login.jsx';
 import AboutPage from '../pages/about.jsx';
 import FormPage from '../pages/form.jsx';
 import PedidosPage from '../pages/pedidos.jsx';
+import ChecarProdutoPage from '../pages/checarProduto.jsx'
 
 import LeftPage1 from '../pages/left-page-1.jsx';
 import LeftPage2 from '../pages/left-page-2.jsx';
@@ -13,32 +15,40 @@ import NotFoundPage from '../pages/404.jsx';
 var routes = [
   {
     path: '/',
-    component: HomePage,
+    component: HomePage
   },
   {
     path: '/pedidos/',
-    component: PedidosPage,
+    component: PedidosPage
+  },
+  {
+    path: '/checar-produto/',
+    component: ChecarProdutoPage
+  },
+  {
+    path: '/login/',
+    component: LoginPage
   },
   {
     path: '/about/',
-    component: AboutPage,
+    component: AboutPage
   },
   {
     path: '/form/',
-    component: FormPage,
+    component: FormPage
   },
 
   {
     path: '/left-page-1/',
-    component: LeftPage1,
+    component: LeftPage1
   },
   {
     path: '/left-page-2/',
-    component: LeftPage2,
+    component: LeftPage2
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
-    component: DynamicRoutePage,
+    component: DynamicRoutePage
   },
   {
     path: '/request-and-load/user/:userId/',

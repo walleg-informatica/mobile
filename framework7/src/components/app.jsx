@@ -27,19 +27,13 @@ import routes from '../js/routes';
 export default class extends React.Component {
   constructor() {
     super();
-
     this.state = {
       // Framework7 Parameters
       f7params: {
         id: 'br.com.walleg', // App bundle ID
         name: 'walleg', // App name
         theme: 'auto', // Automatic theme detection
-
-
-        // App routes
-        routes: routes,
-
-
+        routes: routes, // App routes
         // Input settings
         input: {
           scrollIntoViewOnFocus: this.$device.cordova && !this.$device.electron,
@@ -59,9 +53,8 @@ export default class extends React.Component {
   render() {
     return (
       <App params={ this.state.f7params } >
-
         {/* Right panel with reveal effect*/}
-        <Panel right reveal themeDark>
+        <Panel right themeDark>
           <View>
               <Page>
                 <Navbar title="Left Panel"/>
@@ -72,20 +65,15 @@ export default class extends React.Component {
                 </List>
                 <BlockTitle>Control Main View</BlockTitle>
                 <List>
-                  <ListItem link="/about/" view=".view-main" panel-close title="About"/>
-                  <ListItem link="/form/" view=".view-main" panel-close title="Form"/>
-                  <ListItem link="#" view=".view-main" back panel-close title="Back in history"/>
+                  <ListItem link="/about/" view=".view-main" panel-close title="Sobre"/>
+                  <ListItem link="/form/" view=".view-main" panel-close title="Configurações de Usuário"/>
+                  <ListItem link="#" view=".view-main" back panel-close title="Voltar"/>
                 </List>
               </Page>
             </View>
         </Panel>
-
-
         {/* Your main view, should have "view-main" class */}
         <View main className="safe-areas" url="/" />
-
-
-     
       </App>
     )
   } 
