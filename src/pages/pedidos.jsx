@@ -8,22 +8,22 @@ import React from 'react';
 //import './Pedidos.css';
 
 const load = () => {
-  const url = 'https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido/5502'
+  const url = 'https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido'
   return fetch(url, {mode: 'cors'})
     .then((result) => result.json())
 }
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = React.useState([])
-  console.log(pedidos)
+
   load().then((pedidos) => { 
     console.log("pedidos", pedidos)
     setPedidos(pedidos)
-   })
+  })
 
   return (
     <Page name="form">
-      <Navbar title="Pedidos" backLink="Back" />
+      <Navbar title="Lista de Pedidos" backLink="Back" />
       <div className="data-table">
         <table>
           <thead>

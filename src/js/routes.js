@@ -6,8 +6,9 @@ import FormPage from '../pages/form.jsx';
 import PedidosPage from '../pages/pedidos.jsx';
 import PagamentosPage from '../pages/pagamentos.jsx';
 import ChecarProdutoPage from '../pages/checarProduto.jsx'
-import AlterarPedido from '../pages/alterar-pedido.jsx'
+import AlterarPedidoPage from '../pages/alterar-pedido.jsx'
 import EntradaNfePage from '../pages/entrada-nfe.jsx'
+import ChecarPedidoPage from '../pages/pedido.jsx'
 
 import LeftPage1 from '../pages/left-page-1.jsx';
 import LeftPage2 from '../pages/left-page-2.jsx';
@@ -34,7 +35,11 @@ var routes = [
   },
   {
     path: '/alterar-pedido/',
-    component: AlterarPedido
+    component: AlterarPedidoPage
+  },
+  {
+    path: '/pedido/',
+    component: ChecarPedidoPage
   },
   {
     path: '/login/',
