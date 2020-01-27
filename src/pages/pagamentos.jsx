@@ -31,14 +31,15 @@ const Pagamentos = () => {
           label="Data inicial"
           type="datepicker"
           placeholder="Data inicial"
-          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true}}
+          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true, toolbarCloseText:'Fechar'}}
+          
           onCalendarChange={([d]) => setDate({ initial: d, final: date.final })}
         />
         <ListInput
           label="Data final"
           type="datepicker"
           placeholder="Data final"
-          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true}}
+          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true, toolbarCloseText:'Fechar'}}
           onCalendarChange={([d]) => setDate({ initial: date.initial, final: d })}
         />
       </List>

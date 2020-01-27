@@ -25,7 +25,7 @@ export default () => (
       <ListItem link="/pedidos/" title="Pedido" subtitle="Checar por código de barras">
         <img slot="media" src={`static/${"order-check.jpg"}`} width="48" />
       </ListItem>
-      <ListItem link="/entrada/" title="Entrada NF-e" subtitle="">
+      <ListItem link="/entrada-nfe/" title="Entrada NF-e" subtitle="">
         <img slot="media" src={`static/${"nfe.jpg"}`} width="48" />
       </ListItem>
       <ListItem link="/alterar-pedido/" title="Alterar Pedido" subtitle="Mudança de status">
