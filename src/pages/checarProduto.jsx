@@ -1,8 +1,11 @@
 import React from 'react'
 import {
     Page,
-    Navbar
+    Navbar,
+    List,
+    ListItem
 } from 'framework7-react'
+import { f7 } from 'framework7-react';
 
 const load = (code) => {
     const url = `https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/produto/${code}`
@@ -36,27 +39,37 @@ cordova.plugins.barcodeScanner.scan(
 )
 })
 
+const setLoading = (isLoading) => {
+    isLoading ? f7.dialog.preloader('Carregando...') : f7.dialog.close()
+}
+
+const loadProduto = async(setProduto) => {
+    setLoading(true)
+    let barcode = '9788542212341'
+        if (window.cordova) {
+            const scanReturn = await scan(cordova)
+            barcode = scanReturn.code
+        }
+        const produtos = await load(barcode)
+        setProduto(produtos[0])
+        setLoading(false)
+}
+
 const ChecarProduto = () => {
     const [produto, setProduto] = React.useState({})
     
-    React.useEffect(() => {
-        scan(cordova)
-            .then(({ code }) => load(code).then((produtos) => { 
-                console.log("produtos", produtos)
-                setProduto(produtos[0])
-               }))   
-    }, [])
+    React.useEffect(() => { loadProduto(setProduto) }, [])
 
     return (
         <Page name="form">
             <Navbar title="Produtos" backLink="Back" />
-            <div>
-                <p className="numeric-cell">{produto.estoque_codigo}</p>
-                <p className="label-cell">{produto.estoque_descrição}</p>
-                <p className="label-cell">{produto.estoque}</p>
-                <p className="label-cell">{produto.estoque_codbarras}</p>
-                <p className="label-cell">{produto.estoque_tabela}</p>
-            </div>
+            <List simple-list>
+                <ListItem>{produto.estoque_codigo}</ListItem>
+                <ListItem>{produto.estoque_descrição}</ListItem>
+                <ListItem>{produto.estoque}</ListItem>
+                <ListItem>{produto.estoque_codbarras}</ListItem>
+                <ListItem>{produto.estoque_tabela}</ListItem>
+            </List>
         </Page>
     )
 }

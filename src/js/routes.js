@@ -7,6 +7,7 @@ import PedidosPage from '../pages/pedidos.jsx';
 import PagamentosPage from '../pages/pagamentos.jsx';
 import ChecarProdutoPage from '../pages/checarProduto.jsx'
 import AlterarPedido from '../pages/alterar-pedido.jsx'
+import EntradaNfePage from '../pages/entrada-nfe.jsx'
 
 import LeftPage1 from '../pages/left-page-1.jsx';
 import LeftPage2 from '../pages/left-page-2.jsx';
@@ -47,7 +48,10 @@ var routes = [
     path: '/form/',
     component: FormPage
   },
-
+  {
+    path: '/entrada-nfe/',
+    component: EntradaNfePage
+  },
   {
     path: '/left-page-1/',
     component: LeftPage1
