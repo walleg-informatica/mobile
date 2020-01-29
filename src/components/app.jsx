@@ -43,7 +43,7 @@ export default class extends React.Component {
         statusbar: {
           iosOverlaysWebView: true,
           androidOverlaysWebView: false,
-        },
+        }
       },
       // Login screen demo data
       username: '',
@@ -58,17 +58,10 @@ export default class extends React.Component {
         <Panel right themeDark>
           <View>
               <Page>
-                <Navbar title="Left Panel"/>
-                <BlockTitle>Left View Navigation</BlockTitle>
-                <List>
-                  <ListItem link="/left-page-1/" title="Left Page 1"/>
-                  <ListItem link="/left-page-2/" title="Left Page 2"/>
-                </List>
-                <BlockTitle>Control Main View</BlockTitle>
+                <Navbar title="Walleg Mobile"/>
                 <List>
                   <ListItem link="/about/" view=".view-main" panel-close title="Sobre"/>
                   <ListItem link="/form/" view=".view-main" panel-close title="Configurações de Usuário"/>
-                  <ListItem link="#" view=".view-main" back panel-close title="Voltar"/>
                 </List>
               </Page>
             </View>

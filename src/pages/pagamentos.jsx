@@ -15,8 +15,14 @@ const loadPagamentos = ({ initial, final }, setPagamentos) => {
   const initialDate = helpers.formatDate(initial)
   const finalDate = helpers.formatDate(final)
 
+  helpers.setLoading(true)
+
   helpers.callApi(`pagamentos/${initialDate}/${finalDate}`)
-    .then((pagamentos) => setPagamentos(pagamentos))
+    .then((pagamentos) => {
+      helpers.setLoading(false)
+      console.log(pagamentos)
+      setPagamentos(pagamentos)
+    })
 }
 
 const Pagamentos = () => {
@@ -31,15 +37,15 @@ const Pagamentos = () => {
           label="Data inicial"
           type="datepicker"
           placeholder="Data inicial"
-          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true, toolbarCloseText:'Fechar'}}
-          
+          calendarParams={{dateFormat: 'dd/mm/yyyy', locale: 'pt-BR',closeOnSelect: true, footer: false, toolbarCloseText:'Fechar'}}
+          defaultValue="2020-01-01"
           onCalendarChange={([d]) => setDate({ initial: d, final: date.final })}
         />
         <ListInput
           label="Data final"
           type="datepicker"
           placeholder="Data final"
-          calendarParams={{dateFormat: 'dd/mm/yyyy', footer: true, toolbarCloseText:'Fechar'}}
+          calendarParams={{dateFormat: 'dd/mm/yyyy', locale: 'pt-BR',closeOnSelect: true, footer: false, toolbarCloseText:'Fechar'  }}
           onCalendarChange={([d]) => setDate({ initial: date.initial, final: d })}
         />
       </List>
@@ -48,7 +54,7 @@ const Pagamentos = () => {
 
         <List simple-list>
           {
-            pagamentos.map((pagamento) => <ListItem title="Item 1">a</ListItem>)
+            pagamentos.map((p, i) => <ListItem key={i}>Documento: {p.documento} <br/> Fornecedor {p.fornecedor} <br/> Vencimento: {p.vencimento} <br/> Valor: R$ {p.valor}</ListItem>)
           }
           
         </List>
