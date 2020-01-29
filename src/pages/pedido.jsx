@@ -13,15 +13,16 @@ const setLoading = (isLoading) => {
 }
 
 const loadPedido = async(setPedido) => {
-    setLoading(true)
+    
     let barcode = '5502'
-        if (window.cordova) {
-            const scanReturn = await scan(cordova)
-            barcode = scanReturn.code
-        }
-        const pedido = await helpers.callApi(`/pedido/${barcode}`)
-        setPedido(pedido)
-        setLoading(false)
+    if (window.cordova) {
+        const scanReturn = await helpers.scan(cordova)
+        //barcode = scanReturn.code
+    }
+    setLoading(true)
+    const pedido = await helpers.callApi(`/pedido/${barcode}`)
+    setPedido(pedido)
+    setLoading(false)
 }
 
 const ChecarPedido = () => {
@@ -31,14 +32,14 @@ const ChecarPedido = () => {
 
     return (
         <Page name="form">
-            <Navbar title="Pedido" backLink="Back" />
-            <List simple-list>
-                <ListItem>Id: {pedido.id}</ListItem>
-                <ListItem>Quantidade: {pedido.quantidade}</ListItem>
-                <ListItem>Valor: {pedido.valor}</ListItem>
-                <ListItem>Data: {pedido.data}</ListItem>
-                <ListItem>Status: {pedido.status}</ListItem>
-                <ListItem>Observação: {pedido.observacao}</ListItem>
+            <Navbar title="Pedido" backLink="Voltar" />
+            <List>
+                <ListItem header="código" title={pedido.id}></ListItem>
+                <ListItem header="quantidade" title={pedido.quantidade}></ListItem>
+                <ListItem header="valor" title={pedido.valor}></ListItem>
+                <ListItem header="data" title={pedido.data}></ListItem>
+                <ListItem header="status" title={pedido.statusPedido}></ListItem>
+                <ListItem header="observação" title={pedido.observacao}></ListItem>
             </List>
         </Page>
     )

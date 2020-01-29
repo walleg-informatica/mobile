@@ -6,6 +6,7 @@ import {
 } from 'framework7-react';
 import React from 'react';
 //import './Pedidos.css';
+import helpers from '../js/helpers'
 
 const load = () => {
   const url = 'https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido'
@@ -16,14 +17,17 @@ const load = () => {
 const Pedidos = () => {
   const [pedidos, setPedidos] = React.useState([])
 
-  load().then((pedidos) => { 
-    console.log("pedidos", pedidos)
-    setPedidos(pedidos)
-  })
+  React.useEffect(() => {
+    helpers.setLoading(true)
+    load().then((pedidos) => { 
+      helpers.setLoading(false)
+      setPedidos(pedidos)
+    })
+  }, [])
 
   return (
     <Page name="form">
-      <Navbar title="Lista de Pedidos" backLink="Back" />
+      <Navbar title="Lista de Pedidos" backLink="Voltar" />
       <div className="data-table">
         <table>
           <thead>

@@ -6,7 +6,7 @@
   "repository": "",
   "license": "UNLICENSED",
   "framework7": {
-    "cwd": "C:\\Users\\Walleg\\Desktop\\zikaa",
+    "cwd": ".",
     "type": [
       "cordova"
     ],

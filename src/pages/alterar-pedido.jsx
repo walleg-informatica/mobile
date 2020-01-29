@@ -8,38 +8,44 @@ import {
   Button
 } from 'framework7-react'
 import { f7 } from 'framework7-react';
+import helpers from '../js/helpers'
 
-const loadPedido = () => {
-  const url = 'https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido/5502'
-  return fetch(url, {mode: 'cors'})
-    .then((result) => result.json())
+const loadPedido = async() => {
+  let barcode = '5502'
+  if(window.cordova) {
+    const scanReturn = await helpers.scan(cordova)
+    //barcode = scanReturn.code
+  }
+
+  setLoading(true)
+  const pedido = await helpers.callApi(`pedido/${barcode}`)
+  setLoading(false)
+  return pedido
 }
 
 const loadStatus = () =>
   fetch('https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/statusPedido')
     .then((res => res.json()))
 
-const alterarPedido = (pedidoId, status) => {
+const alterarPedido = async(pedidoId, status) => {
   setLoading(true)
-  fetch(`https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/pedido/alterar-status/${pedidoId}`, {
+  const result = await helpers.callApi(`pedido/alterar-status/${pedidoId}`, {
     method: 'POST',
-    mode: 'no-cors',
     headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
     },
     body: JSON.stringify({ id: pedidoId, status })
-  }).then((res) => {
-    console.log(res)
-    setLoading(false)
-
-    var toastBottom = f7.toast.create({
-      text: 'Pedido alterado com sucesso',
-      closeTimeout: 2000,
-    });
-
-    toastBottom.open()
   })
+  
+  setLoading(false)
+
+  const toastBottom = f7.toast.create({
+    text: 'Pedido alterado com sucesso',
+    closeTimeout: 2000,
+  });
+
+  toastBottom.open()
 }
 
 const setLoading = (isLoading) => 
@@ -64,13 +70,13 @@ const AlterarPedido = () => {
   return(
     <Page name="form">
       <Navbar title="Alterar Pedidos" backLink="Voltar" />
-      <List simple-list>
-        <ListItem title={pedido.id}> {pedido.statusPedido} - {pedido.valor}</ListItem>
+      <List>
+        <ListItem header={`pedido ${pedido.id}`} title={`Valor: R$ ${pedido.valor}`}></ListItem>
       </List>
       <List>
         {
           status.map((({ id, status}) =>
-            <ListItem onChange={(e) => setSelectedStatus(e.target.value)} radio value={status} name="status-radio" defaultChecked={status === pedido.statusPedido} title={status} key={id} />
+            <ListItem onChange={(e) => setSelectedStatus(e.target.value)} radio value={id} name="status-radio" defaultChecked={status === pedido.statusPedido} title={status} key={id} />
           ))
         }
       </List>
