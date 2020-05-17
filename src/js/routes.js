@@ -19,6 +19,10 @@ import NotFoundPage from '../pages/404.jsx';
 var routes = [
   {
     path: '/',
+    component: LoginPage
+  },
+  {
+    path: '/home',
     component: HomePage
   },
   {
@@ -42,7 +46,7 @@ var routes = [
     component: ChecarPedidoPage
   },
   {
-    path: '/login/',
+    path: '/login',
     component: LoginPage
   },
   {

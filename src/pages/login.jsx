@@ -5,81 +5,74 @@ import {
     List,
     ListItem,
     ListInput,
-    ListButtom,
     LoginScreen,
     Block,
-    BlockFooter
+    Button,
+    BlockFooter,
+    ListButton
 } from 'framework7-react'
+import helpers from '../js/helpers'
+import { f7 } from 'framework7-react';
 
-export default class extends React.Component {
-    constructor(props) {
-      super(props);
+
+
+const Login = () => {
+  const [user, setUser] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const [server, setServer] = React.useState("http://localhost:1234")
+  const [serverErrorMessage, setServerErrorMessage] = React.useState(undefined)
+
   
-      this.state = {
-        loginScreenOpened: false,
-        username: '',
-        password: '',
-      };
-    }
-    
-    render() {
-      return (
+  const signIn = (user, password, server) => {
+    helpers.setLoading(true)
+
+    helpers.callApi(`healthcheck`, undefined, server)
+      .then((response) => {
+        helpers.callApi(`login/${user}/${password}`, undefined, server)
+          .then((loginResponse) => {
+            console.log('logou')
+          })
+      })
+      .catch((error) => {
+        helpers.setLoading(false)
+        f7.dialog.alert(`Não foi possivel encontrar o servidor Walleg executando em: <br><br> ${server} <br><br> Contate o administrador do sistema.`)
+      })
+  }
+
+  return (
         <Page>
-          <Navbar title="Login Screen"></Navbar>
+          <Navbar title="Login"></Navbar>
           <Block>
-            <p>Framework7 comes with ready to use Login Screen layout. It could be used inside of page or inside of popup (Embedded) or as a standalone overlay:</p>
+            <p>Bem vindo</p>
           </Block>
-  
           <List>
-            <ListItem link="/login-screen-page/" title="As Separate Page"></ListItem>
+            <ListInput
+              label="usuário"
+              type="text"
+              placeholder="Usuário"
+              onChange={setUser}
+            />
+            <ListInput
+              label="Senha"
+              type="password"
+              placeholder="Senha"
+              onChange={setPassword}
+            />
+            <Button onClick={() => signIn(user, password, server)} large fill>Login</Button>
+
           </List>
-  
-          <Block>
-            <Button raised large fill loginScreenOpen=".demo-login-screen">As Overlay</Button>
-          </Block>
-  
-          <Block>
-            <Button raised large fill onClick={() => {this.setState({loginScreenOpened : true})}}>Open Via Prop Change</Button>
-          </Block>
-  
-          <LoginScreen className="demo-login-screen" opened={this.state.loginScreenOpened} onLoginScreenClosed={() => {this.setState({loginScreenOpened : false})}}>
-            <Page loginScreen>
-              <LoginScreenTitle>Framework7</LoginScreenTitle>
-              <List form>
-                <ListInput
-                  label="Username"
-                  type="text"
-                  placeholder="Your username"
-                  value={this.state.username}
-                  onInput={(e) => {
-                    this.setState({ username: e.target.value});
-                  }}
-                />
-                <ListInput
-                  label="Password"
-                  type="password"
-                  placeholder="Your password"
-                  value={this.state.password}
-                  onInput={(e) => {
-                    this.setState({ password: e.target.value});
-                  }}
-                />
-              </List>
-              <List>
-                <ListButton onClick={this.signIn.bind(this)}>Sign In</ListButton>
-                <BlockFooter>Some text about login information.<br />Lorem ipsum dolor sit amet, consectetur adipiscing elit.</BlockFooter>
-              </List>
-            </Page>
-          </LoginScreen>
+
+          <List>
+            <ListInput
+              label="endereço do servidor"
+              type="text"
+              value={server}
+              onChange={setServer}
+            />
+          </List>          
         </Page>
-      )
-    }
-    signIn() {
-      const self = this;
-      const app = self.$f7;
-  
-      app.dialog.alert(`Username: ${self.state.username}<br>Password: ${self.state.password}`, () => {
-        app.loginScreen.close();
-      });
-    }
-  };
+  )
+}
+
+
+export default Login

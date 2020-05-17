@@ -6,8 +6,10 @@ const helper = {
     const month = (date.getMonth() + 1) < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)
     return date.getFullYear() + "-" + month + "-" + day
   },
-  callApi: (url, options) => {
-    return fetch(`https://8biizghzr4.execute-api.us-west-2.amazonaws.com/production/${url}`, options)
+  callApi: (url, options, server) => {
+    const serverAddress = server || 'http://amazonata.com'
+
+    return fetch(`${serverAddress}/${url}`, options)
       .then((result) => {
         return result.json()
       })
