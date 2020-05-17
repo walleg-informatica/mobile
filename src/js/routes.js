@@ -15,6 +15,7 @@ import LeftPage2 from '../pages/left-page-2.jsx';
 import DynamicRoutePage from '../pages/dynamic-route.jsx';
 import RequestAndLoad from '../pages/request-and-load.jsx';
 import NotFoundPage from '../pages/404.jsx';
+import ProdutoDescricao from '../pages/produto-descricao.jsx';
 
 var routes = [
   {
@@ -36,6 +37,10 @@ var routes = [
   {
     path: '/checar-produto/',
     component: ChecarProdutoPage
+  },
+  {
+    path: '/produto-descricao/',
+    component: ProdutoDescricao
   },
   {
     path: '/alterar-pedido/',

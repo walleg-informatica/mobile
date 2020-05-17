@@ -47,3 +47,17 @@
 #nav__title--large {
   top: 0;
 }
+
+.zeebra{
+
+
+  ul li:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+
+  li {
+    border-bottom: 1px solid #cccccc;
+  }
+
+ 
+}

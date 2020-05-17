@@ -31,7 +31,7 @@ export default class extends React.Component {
       // Framework7 Parameters
       f7params: {
         id: 'br.com.walleg', // App bundle ID
-        name: 'walleg', // App name
+        name: 'Walleg', // App name
         theme: 'auto', // Automatic theme detection
         routes: routes, // App routes
         // Input settings
@@ -51,6 +51,11 @@ export default class extends React.Component {
       
     }
   }
+  logout(){
+    sessionStorage.removeItem("user")
+    
+    window.location = "/"
+  }
   render() {
     return (
       <App params={ this.state.f7params } >
@@ -58,10 +63,9 @@ export default class extends React.Component {
         <Panel right themeDark>
           <View>
               <Page>
-                <Navbar title="Walleg Mobile"/>
+                <Navbar title="Menu"/>
                 <List>
-                  <ListItem link="/about/" view=".view-main" panel-close title="Sobre"/>
-                  <ListItem link="/form/" view=".view-main" panel-close title="Configurações de Usuário"/>
+                  <ListItem onClick={() => this.logout()} view=".view-main" panel-close title="Sair"/>
                 </List>
               </Page>
             </View>

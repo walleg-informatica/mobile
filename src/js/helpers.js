@@ -7,7 +7,11 @@ const helper = {
     return date.getFullYear() + "-" + month + "-" + day
   },
   callApi: (url, options, server) => {
-    const serverAddress = server || 'http://amazonata.com'
+    if(server)  {
+      sessionStorage.setItem("server", server);
+    }
+
+    const serverAddress = server || sessionStorage.getItem("server")
 
     return fetch(`${serverAddress}/${url}`, options)
       .then((result) => {
